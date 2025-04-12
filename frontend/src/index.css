@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+.bg-1{
+    background-image: url("./assets/90595.jpg");
+    background-size: cover;
+}
+
+.style-font{
+    font-family: "Raleway", sans-serif;  
+}
