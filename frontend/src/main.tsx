@@ -9,7 +9,7 @@ import SignupPage from './SignupPage/SignupPage.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
          <Route index element={<LoginPage/>}/>
          <Route path='signup' element={<SignupPage/>}/>
