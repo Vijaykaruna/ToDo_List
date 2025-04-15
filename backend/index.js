@@ -75,7 +75,7 @@ app.listen(5000, () => {
 });
 
 app.post('/upload', async(req, res) => {
-    const {title, data, id, state: Boolean} = req.body;
+    const {title, data, id, state} = req.body;
     try{
         const contentDoc = await ToDoModel.create({
             title,

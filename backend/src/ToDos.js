@@ -5,7 +5,7 @@ const ToDoSchema = new Schema({
     title: {type: String, required: true},
     content: {type: String, required: true},
     id: {type: String, required: true},
-    state:{type: Boolean, require:true},
+    state: {type: Boolean, require:true},
     time: {type: String, require: false}
 })
 
