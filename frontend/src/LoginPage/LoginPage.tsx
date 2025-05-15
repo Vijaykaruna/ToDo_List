@@ -10,7 +10,7 @@ function LoginPage() {
 
   function handleLogin(e:any){
     e.preventDefault();
-    axios.post(`${import.meta.env.VITE_SERVER_APP_URL}/login`, {email, password}, {withCredentials: true})
+    axios.post(`http://localhost:5000/login`, {email, password}, {withCredentials: true})
     .then(res => {console.log(res)
       if(res.status === 200){
         navigate('/home')
