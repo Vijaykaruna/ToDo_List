@@ -123,7 +123,6 @@ app.delete('/deleteTodo', async(req, res) => {
     catch(e){
         res.status(400).json(e);
     }
-
 })
 
 app.put('/finishTodo', async(req, res) => {

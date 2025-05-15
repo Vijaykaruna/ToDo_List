@@ -11,7 +11,7 @@ function HomePage(){
    type Todo = {
       id: any;
       title: string;
-      content: string;
+      content: string;  
       state: boolean;
       time: string;
       _id: string;
@@ -27,23 +27,23 @@ function HomePage(){
    const [addTlt, setAddTlt] = useState<String>('');
 
    const [title, setTitle] = useState('');
-   const [data , setData] = useState('');
+   const [data, setData] = useState('');
    const [name, setName] = useState('');
    const [id, setId] = useState('');
    const [details, setDetails] = useState<Todo[]>([]);
    const [showComp, setShowComp] = useState<Todo[]>([]);
 
-
+   //await axois.post(`${import.meta.eva.VITE_SERVER_APP_URL}/`)
    /* Profile name */
    useEffect(() => {
-      axios.get('http://localhost:5000/profile', {withCredentials: true})
+      axios.get(`${import.meta.env.VITE_SERVER_APP_URL}/profile`, {withCredentials: true})
       .then( res => {
          setName(res.data.name)
       })
    }, [])
    /* Log out */
    function handleLogout(){
-      axios.post('http://localhost:5000/logout', {withCredentials: true})
+      axios.post(`${import.meta.env.VITE_SERVER_APP_URL}/logout`, {withCredentials: true})
       .then( res => {
          console.log(res)
          setName('')
@@ -53,14 +53,15 @@ function HomePage(){
    }
    /* User id */
    useEffect(() =>{
-      axios.get("http://localhost:5000/profile", {withCredentials: true})
+      axios.get(`${import.meta.env.VITE_SERVER_APP_URL}/profile`, {withCredentials: true})
       .then(res => setId(res.data.id))
       .catch(err => console.log(err));
     }, [])
 
   /*handling add ToDo list */
+ // http://localhost:5000/upload
    function handleAdd(){
-      axios.post('http://localhost:5000/upload', {title, data, id})
+      axios.post(`${import.meta.env.VITE_SERVER_APP_URL}/upload`, {title, data, id})
       .then(res => {console.log(res)
          setShowAdd(true);
          setTitle('');
@@ -72,7 +73,7 @@ function HomePage(){
       })
    }
    useEffect(() => {
-      axios.get("http://localhost:5000/ongoing", {withCredentials: true})
+      axios.get(`${import.meta.env.VITE_SERVER_APP_URL}/ongoing`, {withCredentials: true})
       .then(res => {
         setDetails(res.data); 
       })
@@ -80,7 +81,7 @@ function HomePage(){
     });
 
   useEffect(() => {
-   axios.get("http://localhost:5000/completed", {withCredentials: true})
+   axios.get(`${import.meta.env.VITE_SERVER_APP_URL}/completed`, {withCredentials: true})
    .then(res => {
       setShowComp(res.data);
    })
@@ -88,7 +89,7 @@ function HomePage(){
   })
  
   function handleDelete(id: any, tlt: String){
-   axios.delete("http://localhost:5000/deleteTodo", {data: {id}})
+   axios.delete(`${import.meta.env.VITE_SERVER_APP_URL}/deleteTodo`, {data: {id}})
    .then(res => {
      console.log(res)
      setShowDel(true)
@@ -98,7 +99,7 @@ function HomePage(){
  }
 
    function handleMark(id: any, tlt: String){
-   axios.put("http://localhost:5000/finishTodo", {id})
+   axios.put(`${import.meta.env.VITE_SERVER_APP_URL}/finishTodo`, {id})
  .then(res => {
     setShowCpt(true)
     setMarkTlt(tlt);
