@@ -11,7 +11,7 @@ function SignupPage(){
 
   function handleSignup(e: any){
     e.preventDefault();
-    axios.post('http://localhost:5000/signup', {name, email, password})
+    axios.post(`${import.meta.env.VITE_SERVER_APP_URL}/signup`, {name, email, password})
     .then(res => {console.log(res)
       navigate('/')
     })
