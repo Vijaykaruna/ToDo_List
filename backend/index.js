@@ -13,12 +13,25 @@ const salt = bcrypt.genSaltSync(10);
 const secret = process.env.JWT_SECRET;
 
 app.use(express.json());
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://to-do-list-ochre-zeta.vercel.app"
+];
+
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://to-do-list-ochre-zeta.vercel.app/"],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+
 
 app.use(cookieParser());
 mongoose.connect(process.env.MONGO_URL)
