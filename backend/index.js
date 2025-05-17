@@ -15,7 +15,7 @@ const secret = process.env.JWT_SECRET;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://to-do-list-9d3bq8xkd-vijay-ks-projects-13a1388b.vercel.app"],
+    origin: ["http://localhost:5173", "https://to-do-list-ochre-zeta.vercel.app/"],
     credentials: true,
   })
 );
