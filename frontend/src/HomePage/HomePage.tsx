@@ -45,7 +45,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
    }
    /* User id */
    useEffect(() => {
-   axios.get(`${SERVER_URL}/profile`, { withCredentials: true })
+   axios.get(`https://todo-list-backend-aj15.onrender.com/profile`, { withCredentials: true })
     .then(res => {
       setName(res.data.name);
       setId(res.data.id);
@@ -68,13 +68,13 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
       })
    }
       const fetchOngoing = () => {
-      axios.get(`${SERVER_URL}/ongoing`, { withCredentials: true })
+      axios.get(`https://todo-list-backend-aj15.onrender.com/ongoing`, { withCredentials: true })
          .then(res => setDetails(res.data))
          .catch(err => console.log(err));
       };
 
       const fetchCompleted = () => {
-      axios.get(`${SERVER_URL}/completed`, { withCredentials: true })
+      axios.get(`https://todo-list-backend-aj15.onrender.com/completed`, { withCredentials: true })
          .then(res => setShowComp(res.data))
          .catch(err => console.log(err));
       };
