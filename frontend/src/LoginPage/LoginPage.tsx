@@ -3,6 +3,7 @@ import { useNavigate,Link } from "react-router-dom";
 import axios from "axios";
 
 function LoginPage() {
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -10,7 +11,8 @@ function LoginPage() {
 
   function handleLogin(e:any){
     e.preventDefault();
-    axios.post(`http://localhost:5000/login`, {email, password}, {withCredentials: true})
+    console.log(SERVER_URL);
+    axios.post(`${SERVER_URL}/login`, {email, password}, {withCredentials: true})
     .then(res => {console.log(res)
       if(res.status === 200){
         navigate('/home')

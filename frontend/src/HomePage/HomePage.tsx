@@ -18,7 +18,7 @@ function HomePage(){
     };
     
    const navigate = useNavigate();
-
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
    const [showAdd, setShowAdd] = useState<boolean>(false);
    const [showCpt, setShowCpt] = useState<boolean>(false);
    const [showDel, setShowDel] = useState<boolean>(false);
@@ -33,17 +33,9 @@ function HomePage(){
    const [details, setDetails] = useState<Todo[]>([]);
    const [showComp, setShowComp] = useState<Todo[]>([]);
 
-   //await axois.post(`${import.meta.eva.VITE_SERVER_APP_URL}/`)
-   /* Profile name */
-   useEffect(() => {
-      axios.get(`http://localhost:5000/profile`, {withCredentials: true})
-      .then( res => {
-         setName(res.data.name)
-      })
-   }, [])
    /* Log out */
    function handleLogout(){
-      axios.post(`http://localhost:5000/logout`, {withCredentials: true})
+      axios.post(`${SERVER_URL}/logout`, {withCredentials: true})
       .then( res => {
          console.log(res)
          setName('')
@@ -52,58 +44,65 @@ function HomePage(){
       .catch(err => console.log(err));
    }
    /* User id */
-   useEffect(() =>{
-      axios.get(`http://localhost:5000/profile`, {withCredentials: true})
-      .then(res => setId(res.data.id))
-      .catch(err => console.log(err));
-    }, [])
+   useEffect(() => {
+   axios.get(`${SERVER_URL}/profile`, { withCredentials: true })
+    .then(res => {
+      setName(res.data.name);
+      setId(res.data.id);
+    })
+    .catch(err => console.log(err));
+}, []);
 
   /*handling add ToDo list */
- // http://localhost:5000/upload
    function handleAdd(){
-      axios.post(`http://localhost:5000/upload`, {title, data, id})
+      axios.post(`${SERVER_URL}/upload`, {title, data, id})
       .then(res => {console.log(res)
          setShowAdd(true);
          setTitle('');
          setData('');
          setAddTlt(title);
+         fetchOngoing();
       })
       .catch(err => {console.log(err)
         console.log(data);
       })
    }
-   useEffect(() => {
-      axios.get(`http://localhost:5000/ongoing`, {withCredentials: true})
-      .then(res => {
-        setDetails(res.data); 
-      })
-      .catch(err => console.log(err));
-    });
+      const fetchOngoing = () => {
+      axios.get(`${SERVER_URL}/ongoing`, { withCredentials: true })
+         .then(res => setDetails(res.data))
+         .catch(err => console.log(err));
+      };
 
-  useEffect(() => {
-   axios.get(`http://localhost:5000/completed`, {withCredentials: true})
-   .then(res => {
-      setShowComp(res.data);
-   })
-   .catch(err => console.log(err))
-  })
+      const fetchCompleted = () => {
+      axios.get(`${SERVER_URL}/completed`, { withCredentials: true })
+         .then(res => setShowComp(res.data))
+         .catch(err => console.log(err));
+      };
+      useEffect(() => {
+      fetchOngoing();
+      fetchCompleted();
+      }, []);
  
   function handleDelete(id: any, tlt: String){
-   axios.delete(`http://localhost:5000/deleteTodo`, {data: {id}})
+   axios.delete(`${SERVER_URL}/deleteTodo`, {data: {id}})
    .then(res => {
      console.log(res)
      setShowDel(true)
      setDelTlt(tlt);
+     fetchOngoing(); 
+     fetchCompleted();
    })
    .catch(err => console.log(err));
  }
 
    function handleMark(id: any, tlt: String){
-   axios.put(`http://localhost:5000/finishTodo`, {id})
+   axios.put(`${SERVER_URL}/finishTodo`, {id})
  .then(res => {
     setShowCpt(true)
     setMarkTlt(tlt);
     console.log(res)
+    fetchOngoing();
+    fetchCompleted();
  })
  .catch(err => console.log(err));
    }

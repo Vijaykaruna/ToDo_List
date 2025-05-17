@@ -6,21 +6,31 @@ const ToDoModel = require('./src/ToDos.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const app = express();
 const salt = bcrypt.genSaltSync(10);
-const secret = "gsdg23734dfhhjsqdq";
-
-app.use(express.json());
+const secret = process.env.JWT_SECRET;
+//const secret = "gsdg23734dfhhjsqdq";
+ app.use(express.json());
+// app.use(
+//     cors({
+//         origin: "http://localhost:5173",
+//         credentials: true,
+//     })
+// );
 app.use(
-    cors({
-        origin: "http://localhost:5173",
-        credentials: true,
-    })
+  cors({
+    origin: ["http://localhost:5173", "https://your-vercel-app.vercel.app"],
+    credentials: true,
+  })
 );
-app.use(cookieParser());
 
-mongoose.connect('mongodb+srv://vijaykarunanithi2003:CMT5Y2CToy9Gby9b@cluster0.2totnoe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+app.use(cookieParser());
+mongoose.connect(process.env.MONGO_URL)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('MongoDB connection error:', err));
+/*{mongoose.connect('mongodb+srv://vijaykarunanithi2003:CMT5Y2CToy9Gby9b@cluster0.2totnoe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');}*/
 // mongodb+srv://vijaykarunanithi2003:CMT5Y2CToy9Gby9b@cluster0.2totnoe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
 app.post('/signup', async (req, res) => {
@@ -70,8 +80,10 @@ app.post('/logout', (req, res) => {
     res.cookie('token', '').json("logged out!").status(200);
 });
 
-app.listen(5000, () => {
-    console.log("server running in  port 5000");
+/* app.listen(5000, () => { console.log("server running in  port 5000");}); */
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
 
 app.post('/upload', async(req, res) => {

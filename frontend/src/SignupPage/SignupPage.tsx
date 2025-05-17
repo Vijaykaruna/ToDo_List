@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 function SignupPage(){
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -11,7 +12,7 @@ function SignupPage(){
 
   function handleSignup(e: any){
     e.preventDefault();
-    axios.post(`http://localhost:5000/signup`, {name, email, password})
+    axios.post(`${SERVER_URL}/signup`, {name, email, password})
     .then(res => {console.log(res)
       navigate('/')
     })
