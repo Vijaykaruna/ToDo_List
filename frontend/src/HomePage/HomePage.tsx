@@ -35,7 +35,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
 
    /* Log out */
    function handleLogout(){
-      axios.post(`${SERVER_URL}/logout`, {withCredentials: true})
+      axios.post(`${SERVER_URL}/logout`, {}, { withCredentials: true })
       .then( res => {
          console.log(res)
          setName('')
