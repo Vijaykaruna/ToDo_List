@@ -21,7 +21,7 @@ const secret = process.env.JWT_SECRET;
 // );
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://your-vercel-app.vercel.app"],
+    origin: "https://todo-backend-cldv.onrender.com",
     credentials: true,
   })
 );
