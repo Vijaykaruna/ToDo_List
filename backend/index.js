@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const UserModel = require('./src/Users.js');
 const ToDoModel = require('./src/ToDos.js');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
