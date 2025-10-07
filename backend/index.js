@@ -37,7 +37,6 @@ app.use(cookieParser());
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
-// mongodb+srv://vijaykarunanithi2003:CMT5Y2CToy9Gby9b@cluster0.2totnoe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
 app.post('/signup', async (req, res) => {
    const {name, email, password} = req.body;
