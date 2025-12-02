@@ -16,7 +16,6 @@ app.use(express.json());
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://to-do-list-ochre-zeta.vercel.app"
 ];
 
 app.use(

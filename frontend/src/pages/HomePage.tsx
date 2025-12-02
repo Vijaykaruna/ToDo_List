@@ -211,9 +211,9 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
 
                <div className="tab-pane fade" id="pills-completed" role="tabpanel" aria-labelledby="pills-completed-tab">
               {/* Completed List */}
-              {showComp.map((todo) => {
+              {showComp.map((todo, index) => {
                return(
-                  <div className="bg-light bg-opacity-25 my-2 mx-2 px-3 pt-2 rounded-1 text-light d-flex justify-content-between align-items-center shadow-lg">
+                  <div key={index} className="bg-light bg-opacity-25 my-2 mx-2 px-3 pt-2 rounded-1 text-light d-flex justify-content-between align-items-center shadow-lg">
                      <div>
                         <p className="fw-bold">Title: {todo.title}</p>
                         <p>Desc: {todo.content}</p>

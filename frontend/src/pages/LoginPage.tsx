@@ -13,7 +13,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
     e.preventDefault();
     console.log(SERVER_URL);
     axios.post(`${SERVER_URL}/login`, {email, password}, {withCredentials: true})
-    .then(res => {console.log(res)
+    .then(res => {//console.log(res)
       if(res.status === 200){
         navigate('/home')
         setErr('')
