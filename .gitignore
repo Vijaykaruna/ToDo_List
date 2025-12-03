@@ -20,6 +20,6 @@ build/
 .DS_Store
 Thumbs.db
 
-# Editor folders
+# Editor configs
 .vscode/
 .idea/

@@ -17,8 +17,8 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
-      "https://your-frontend.vercel.app"   // ← add after deployment
+      "https://aesthetic-puffpuff-c2aef1.netlify.app/",  // ← add after deployment
+      "http://localhost:5173"
     ],
     credentials: true,
   })
