@@ -18,7 +18,7 @@ function HomePage(){
     };
     
    const navigate = useNavigate();
-   const SERVER_URL = import.meta.env.VITE_SERVER_URL || "http://localhost:5000";
+   const SERVER_URL = import.meta.env.VITE_SERVER_URL;
    const [showAdd, setShowAdd] = useState<boolean>(false);
    const [showCpt, setShowCpt] = useState<boolean>(false);
    const [showDel, setShowDel] = useState<boolean>(false);
