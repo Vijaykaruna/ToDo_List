@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      "https://aesthetic-puffpuff-c2aef1.netlify.app/",  // ← add after deployment
+      "https://todo-list-frontend-only.netlify.app/",  // ← add after deployment
       "http://localhost:5173"
     ],
     credentials: true,
